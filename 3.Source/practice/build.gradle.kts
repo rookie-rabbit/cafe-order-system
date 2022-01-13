@@ -30,12 +30,21 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
+    runtimeOnly("mysql:mysql-connector-java")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.junit.platform:junit-platform-launcher:1.5.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.5.0")
+
+    implementation(group = "org.thymeleaf.extras", name = "thymeleaf-extras-springsecurity5")
+    implementation(group = "org.thymeleaf.extras", name = "thymeleaf-extras-java8time")
 }
 
 tasks.withType<KotlinCompile> {
