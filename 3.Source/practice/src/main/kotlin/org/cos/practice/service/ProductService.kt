@@ -1,6 +1,6 @@
 package org.cos.practice.service
 
-import org.cos.practice.Entity.ProductEntity
+import org.cos.practice.entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
 
 interface ProductService {

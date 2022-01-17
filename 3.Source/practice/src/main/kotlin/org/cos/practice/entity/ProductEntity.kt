@@ -1,4 +1,4 @@
-package org.cos.practice.Entity
+package org.cos.practice.entity
 
 import lombok.*
 import java.time.LocalDateTime

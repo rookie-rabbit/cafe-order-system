@@ -33,7 +33,7 @@ dependencies {
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    runtimeOnly("com.h2database:h2")
+    //implementation("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
     implementation("mysql:mysql-connector-java")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

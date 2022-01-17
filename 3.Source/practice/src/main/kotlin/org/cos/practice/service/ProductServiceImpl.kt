@@ -1,7 +1,7 @@
 package org.cos.practice.service
 
 import lombok.RequiredArgsConstructor
-import org.cos.practice.Entity.ProductEntity
+import org.cos.practice.entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
 import org.cos.practice.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired

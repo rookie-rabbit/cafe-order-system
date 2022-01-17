@@ -1,16 +1,13 @@
 package org.cos.practice.controller
 
 import lombok.RequiredArgsConstructor
-import org.cos.practice.Entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
-import org.cos.practice.repository.ProductRepository
 import org.cos.practice.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
-import java.time.LocalDateTime
 import javax.transaction.Transactional
 
 @RestController
