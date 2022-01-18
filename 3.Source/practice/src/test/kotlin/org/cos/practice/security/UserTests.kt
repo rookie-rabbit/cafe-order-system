@@ -1,17 +1,12 @@
 package org.cos.practice.security
 
-import org.cos.practice.Entity.UserEntity
+import org.cos.practice.entity.UserEntity
 import org.cos.practice.repository.UserRepository
-import org.cos.practice.service.ProductService
 import org.cos.practice.service.UserService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.util.Assert
-import java.util.function.Predicate.isEqual
-import java.util.stream.IntStream
-import javax.transaction.Transactional
 
 @SpringBootTest
 class UserTests {

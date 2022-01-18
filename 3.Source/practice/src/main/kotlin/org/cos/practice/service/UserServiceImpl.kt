@@ -1,7 +1,7 @@
 package org.cos.practice.service
 
 import lombok.RequiredArgsConstructor
-import org.cos.practice.Entity.UserEntity
+import org.cos.practice.entity.UserEntity
 import org.cos.practice.dto.UserDTO
 import org.cos.practice.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
