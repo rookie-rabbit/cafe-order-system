@@ -1,12 +1,12 @@
 package org.cos.practice.security
 
-import org.cos.practice.entity.UserEntity
 import org.cos.practice.repository.UserRepository
 import org.cos.practice.service.UserService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.util.Assert
 
 @SpringBootTest
 class UserTests {
@@ -22,24 +22,24 @@ class UserTests {
 //    @Test
 //    fun insertDummies() {
 //        for (i in 1..9) {
-//            val user = UserEntity(uID = "user$i@nhn-commerce.com", uPW = passwordEncoder.encode("1111"), uRL = 1)
+//            val user = UserEntity(user_email = "user$i@nhn-commerce.com", user_password = passwordEncoder.encode("1111"), user_is_admin = false)
 //            userRepository.save(user)
 //        }
-//        val admin = UserEntity(uID = "admin@nhn-commerce.com", uPW = passwordEncoder.encode("1111"), uRL = 2)
+//        val admin = UserEntity(user_email = "admin@nhn-commerce.com", user_password = passwordEncoder.encode("1111"), user_is_admin = true)
 //        userRepository.save(admin)
 //    }
 
     @Test
     fun deleteTest() {
         for (i in 1..9) {
-            val uID: String = "user$i@nhn-commerce.com"
-            val ret: String = service.delete(uID)
+            val user_email: String = "user$i@nhn-commerce.com"
+            val ret: String = service.delete(user_email)
 
-            Assert.isTrue(uID.equals(ret))
+            Assert.isTrue(user_email.equals(ret))
         }
-        val uID: String = "admin@nhn-commerce.com"
-        val ret: String = service.delete(uID)
+        val user_email: String = "admin@nhn-commerce.com"
+        val ret: String = service.delete(user_email)
 
-        Assert.isTrue(uID.equals(ret))
+        Assert.isTrue(user_email.equals(ret))
     }
 }

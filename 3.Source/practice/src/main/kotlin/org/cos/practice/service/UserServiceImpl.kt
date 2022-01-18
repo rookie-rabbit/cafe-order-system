@@ -9,42 +9,42 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class UserServiceImpl : UserService{
+class UserServiceImpl : UserService {
 
     @Autowired
     private lateinit var repository: UserRepository
 
     @Override
     override fun insert(dto: UserDTO): String {
-        val entity : UserEntity = dtoToEntity(dto)!!
+        val entity: UserEntity = dtoToEntity(dto)!!
         repository.save(entity)
-        return entity.uID
+        return entity.user_email
     }
 
     @Override
-    override fun read(uID: String): UserDTO? {
-        val a = repository.findById(uID)
-        return if(a.isPresent()) entityToDTO(a.get()) else null
+    override fun read(user_email: String): UserDTO? {
+        val a = repository.findById(user_email)
+        return if (a.isPresent()) entityToDTO(a.get()) else null
     }
 
     override fun modify(dto: UserDTO): String {
-        val result = repository.findById(dto.uID)
+        val result = repository.findById(dto.user_email)
 
-        if(result.isPresent()){
-            val entity : UserEntity = result.get();
-            entity.changePassword(dto.uPW)
-            return entity.uID
+        if (result.isPresent()) {
+            val entity: UserEntity = result.get()
+            entity.changePassword(dto.user_password)
+            return entity.user_email
         }
-        return "";
+        return ""
     }
 
     @Override
-    override fun delete(uID: String): String {
-        try{
-            repository.deleteById(uID)
-            return uID
-        }catch (ex: Exception){
-            return ""
+    override fun delete(user_email: String): String {
+        return try {
+            repository.deleteById(user_email)
+            user_email
+        } catch (ex: Exception) {
+            ""
         }
     }
 }

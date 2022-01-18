@@ -7,7 +7,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 class UserDTO (
-    val uID: String = "",
-    val uPW: String = "",
-    val uRL: Int = 0
+    val user_email: String = "",
+    val user_password: String = "",
+    val user_is_admin: Boolean = false
 ){}
