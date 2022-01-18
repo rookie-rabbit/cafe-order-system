@@ -16,9 +16,9 @@ class ProductServiceImpl : ProductService{
 
     @Override
     override fun insert(dto: ProductDTO): Long {
-        var entity : ProductEntity = dtoToEntity(dto)!!;
-        repository.save(entity);
-        return entity.pID;
+        var entity : ProductEntity = dtoToEntity(dto)!!
+        repository.save(entity)
+        return entity.pID
     }
 
     @Override

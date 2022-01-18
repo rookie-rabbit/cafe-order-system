@@ -1,6 +1,5 @@
 package org.cos.practice.repository
 
-import org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.isEquals
 import org.cos.practice.Entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
 import org.cos.practice.service.ProductService
