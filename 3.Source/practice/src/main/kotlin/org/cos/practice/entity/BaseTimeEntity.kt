@@ -1,4 +1,4 @@
-package org.cos.practice.Entity
+package org.cos.practice.entity
 
 import lombok.Getter
 import lombok.NoArgsConstructor
@@ -17,9 +17,9 @@ import javax.persistence.MappedSuperclass
 abstract class BaseTimeEntity {
     @CreatedDate
     @Column(name = "regDate", updatable=false)
-    private val regDate: LocalDateTime? = null;
+    private val regDate: LocalDateTime? = LocalDateTime.now();
 
     @LastModifiedDate
     @Column(name = "modifiedDate")
-    private val modifiedDate: LocalDateTime? = null;
+    private val modifiedDate: LocalDateTime? = LocalDateTime.now();
 }

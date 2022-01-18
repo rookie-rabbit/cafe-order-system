@@ -1,6 +1,6 @@
 package org.cos.practice.repository
 
-import org.cos.practice.Entity.ProductEntity
+import org.cos.practice.entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
 import org.cos.practice.service.ProductService
 import org.junit.jupiter.api.Test
