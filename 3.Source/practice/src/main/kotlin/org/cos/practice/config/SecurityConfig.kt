@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import kotlin.Throws
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import java.lang.Exception
 
 @Configuration
@@ -22,6 +23,23 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication().withUser("user1")
             .password("\$2a\$10\$nRzEZH4SoANA/RQyKN5obeM23Ho3N4yhO9QI6GFmp9z9SlHfOyLu.")
-            .roles("USER")
+            .roles("USER").roles("ADMIN")
+    }
+
+    override fun configure(http: HttpSecurity?) {
+        if (http != null) {
+            http.authorizeRequests()
+                    .anyRequest().authenticated()
+                    .and()
+                    .csrf().disable()
+                    .httpBasic()
+                    .and()
+                    .formLogin()
+                    .defaultSuccessUrl("/home", true)
+                    .and()
+                    .logout()
+                    .and()
+                    .exceptionHandling().accessDeniedPage("/403")
+        }
     }
 }
