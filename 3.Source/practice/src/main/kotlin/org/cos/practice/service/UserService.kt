@@ -5,9 +5,9 @@ import org.cos.practice.dto.UserDTO
 
 interface UserService {
     fun insert(dto: UserDTO): String
-    fun read(user_email: String): UserDTO?
+    fun read(userEmail: String): UserDTO?
     fun modify(dto: UserDTO): String
-    fun delete(user_email: String): String
+    fun delete(userEmail: String): String
 
     fun dtoToEntity(dto: UserDTO): UserEntity? {
         return UserEntity(dto.userEmail, dto.userPassword, dto.userRole)

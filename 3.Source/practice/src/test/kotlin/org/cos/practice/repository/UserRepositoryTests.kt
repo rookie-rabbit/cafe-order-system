@@ -15,15 +15,11 @@ import org.springframework.util.Assert
 import java.util.*
 
 @SpringBootTest
-class UserRepositoryTests {
-    @Autowired
-    private lateinit var repository: UserRepository
-
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
-
-    @Autowired
-    private lateinit var service: UserService
+class UserRepositoryTests @Autowired constructor(
+    val repository: UserRepository,
+    val passwordEncoder: PasswordEncoder,
+    val service: UserService
+) {
 
     @Test
     fun insertDummies() {
@@ -53,12 +49,12 @@ class UserRepositoryTests {
 
     @Test
     fun deleteTest() {
-        val userEmail: String = "user@nhn-commerce.com"
+        val userEmail = "user@nhn-commerce.com"
         val userRet: String = service.delete(userEmail)
 
         Assertions.assertEquals(userEmail, userRet)
 
-        val adminEmail: String = "admin@nhn-commerce.com"
+        val adminEmail = "admin@nhn-commerce.com"
         val adminRet: String = service.delete(adminEmail)
 
         Assertions.assertEquals(adminEmail, adminRet)

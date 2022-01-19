@@ -5,9 +5,9 @@ import org.cos.practice.entity.FavoriteEntity
 
 interface FavoriteService {
     fun insert(dto: FavoriteDTO): String
-    fun read(user_email: String): FavoriteDTO?
+    fun read(userEmail: String): FavoriteDTO?
     //    fun modify(dto : FavoriteDTO) : String
-    fun delete(user_email: String): String
+    fun delete(userEmail: String): String
 
     fun dtoToEntity(dto: FavoriteDTO): FavoriteEntity? {
         return FavoriteEntity(dto.userEmail, dto.productId)

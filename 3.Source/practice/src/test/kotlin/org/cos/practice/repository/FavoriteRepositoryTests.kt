@@ -11,12 +11,11 @@ import org.springframework.util.Assert
 import javax.transaction.Transactional
 
 @SpringBootTest
-class FavoriteRepositoryTests() {
-    @Autowired
-    private lateinit var repository: FavoriteRepository
+class FavoriteRepositoryTests @Autowired constructor(
+    val repository: FavoriteRepository,
+    val service: FavoriteService
+) {
 
-    @Autowired
-    private lateinit var service: FavoriteService
 
     @Test
     fun insertDummies() {

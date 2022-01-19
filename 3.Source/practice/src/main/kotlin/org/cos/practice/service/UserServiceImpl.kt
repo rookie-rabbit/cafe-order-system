@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class UserServiceImpl : UserService {
-    @Autowired
-    private lateinit var repository: UserRepository
+class UserServiceImpl @Autowired constructor(
+    val repository: UserRepository
+) : UserService {
 
     @Override
     override fun insert(dto: UserDTO): String {
@@ -21,8 +21,8 @@ class UserServiceImpl : UserService {
     }
 
     @Override
-    override fun read(uid: String): UserDTO? {
-        val a = repository.findById(uid)
+    override fun read(userEmail: String): UserDTO? {
+        val a = repository.findById(userEmail)
         return if (a.isPresent()) entityToDTO(a.get()) else null
     }
 
@@ -38,10 +38,10 @@ class UserServiceImpl : UserService {
     }
 
     @Override
-    override fun delete(uid: String): String {
+    override fun delete(userEmail: String): String {
         return try {
-            repository.deleteById(uid)
-            uid
+            repository.deleteById(userEmail)
+            userEmail
         } catch (ex: Exception) {
             ""
         }

@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class CategoryServiceImpl : CategoryService {
-
-    @Autowired
-    private lateinit var repository: CategoryRepository
+class CategoryServiceImpl @Autowired constructor(
+    val repository: CategoryRepository
+) : CategoryService {
 
     @Override
     override fun insert(dto: CategoryDTO): Long {
@@ -22,8 +21,8 @@ class CategoryServiceImpl : CategoryService {
     }
 
     @Override
-    override fun read(cid: Long): CategoryDTO? {
-        val a = repository.findById(cid)
+    override fun read(categoryId: Long): CategoryDTO? {
+        val a = repository.findById(categoryId)
         return if (a.isPresent()) entityToDTO(a.get()) else null
     }
 
@@ -41,10 +40,10 @@ class CategoryServiceImpl : CategoryService {
     }
 
     @Override
-    override fun delete(cid: Long): Long {
+    override fun delete(categoryId: Long): Long {
         return try {
-            repository.deleteById(cid)
-            cid
+            repository.deleteById(categoryId)
+            categoryId
         } catch (ex: Exception) {
             -1
         }

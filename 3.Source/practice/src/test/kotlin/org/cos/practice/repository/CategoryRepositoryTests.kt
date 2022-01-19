@@ -14,12 +14,10 @@ import org.springframework.util.Assert
 import javax.transaction.Transactional
 
 @SpringBootTest
-class CategoryRepositoryTests() {
-    @Autowired
-    private lateinit var repository: CategoryRepository
-
-    @Autowired
-    private lateinit var service: CategoryService
+class CategoryRepositoryTests @Autowired constructor(
+    val repository: CategoryRepository,
+    val service: CategoryService
+) {
 
     @Test
     fun insertDummies() {

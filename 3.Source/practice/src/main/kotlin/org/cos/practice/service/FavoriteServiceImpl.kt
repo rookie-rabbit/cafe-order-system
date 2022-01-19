@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class FavoriteServiceImpl : FavoriteService {
-
-    @Autowired
-    private lateinit var repository: FavoriteRepository
+class FavoriteServiceImpl @Autowired constructor(
+    val repository: FavoriteRepository
+) : FavoriteService {
 
     @Override
     override fun insert(dto: FavoriteDTO): String {
@@ -22,16 +21,16 @@ class FavoriteServiceImpl : FavoriteService {
     }
 
     @Override
-    override fun read(uid: String): FavoriteDTO? {
-        val a = repository.findById(uid)
+    override fun read(userEmail: String): FavoriteDTO? {
+        val a = repository.findById(userEmail)
         return if (a.isPresent()) entityToDTO(a.get()) else null
     }
 
     @Override
-    override fun delete(uid: String): String {
+    override fun delete(userEmail: String): String {
         return try {
-            repository.deleteById(uid)
-            uid
+            repository.deleteById(userEmail)
+            userEmail
         } catch (ex: Exception) {
             ""
         }
