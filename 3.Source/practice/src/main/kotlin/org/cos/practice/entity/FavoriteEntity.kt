@@ -15,8 +15,8 @@ import javax.persistence.Table
 data class FavoriteEntity(
     @Id
     @Column(name = "user_email")
-    val user_email: String = "",
+    val userEmail: String = "",
 
     @Column(name = "product_id")
-    val product_id: Long = 0L
+    val productId: Long = 0L
 )

@@ -17,31 +17,31 @@ class UserServiceImpl : UserService {
     override fun insert(dto: UserDTO): String {
         val entity: UserEntity = dtoToEntity(dto)!!
         repository.save(entity)
-        return entity.user_email
+        return entity.userEmail
     }
 
     @Override
-    override fun read(user_email: String): UserDTO? {
-        val a = repository.findById(user_email)
+    override fun read(uid: String): UserDTO? {
+        val a = repository.findById(uid)
         return if (a.isPresent()) entityToDTO(a.get()) else null
     }
 
     override fun modify(dto: UserDTO): String {
-        val result = repository.findById(dto.user_email)
+        val result = repository.findById(dto.userEmail)
 
         if (result.isPresent()) {
             val entity: UserEntity = result.get()
-            entity.changePassword(dto.user_password)
-            return entity.user_email
+            entity.changePassword(dto.userPassword)
+            return entity.userEmail
         }
         return ""
     }
 
     @Override
-    override fun delete(user_email: String): String {
+    override fun delete(uid: String): String {
         return try {
-            repository.deleteById(user_email)
-            user_email
+            repository.deleteById(uid)
+            uid
         } catch (ex: Exception) {
             ""
         }

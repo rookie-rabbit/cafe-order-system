@@ -19,12 +19,12 @@ data class CategoryEntity(
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val category_id: Long = 0L,
+    val categoryId: Long = 0L,
 
     @Column(name = "category_name")
-    var category_name: String = ""
+    var categoryName: String = ""
 ) {
     fun changeName(name: String) {
-        this.category_name = name
+        this.categoryName = name
     }
 }

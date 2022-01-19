@@ -14,18 +14,18 @@ import javax.persistence.*
 data class UserEntity(
     @Id
     @Column(name = "user_email", length = 100)
-    val user_email: String = "",
+    val userEmail: String = "",
 
     @Column(name = "user_password", length = 100)
-    var user_password: String = "",
+    var userPassword: String = "",
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
-    val user_role: Role = Role.USER
+    val userRole: Role = Role.USER
 
 ) : BaseTimeEntity() {
     fun changePassword(name: String) {
-        this.user_password = name
+        this.userPassword = name
     }
 }
 

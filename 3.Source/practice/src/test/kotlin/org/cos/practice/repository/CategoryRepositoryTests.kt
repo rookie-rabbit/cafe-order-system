@@ -6,6 +6,7 @@ import org.cos.practice.entity.CategoryEntity
 import org.cos.practice.entity.FavoriteEntity
 import org.cos.practice.service.CategoryService
 import org.cos.practice.service.FavoriteService
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -20,25 +21,25 @@ class CategoryRepositoryTests() {
     @Autowired
     private lateinit var service: CategoryService
 
-//    @Test
-//    fun insertDummies() {
-//        val category = CategoryEntity(category_id = 1, category_name = "test")
-//        repository.save(category)
-//    }
+    @Test
+    fun insertDummies() {
+        val category = CategoryEntity(categoryId = 1L, categoryName = "test")
+        repository.save(category)
+    }
 
-//    @Test
-//    fun readTest() {
-//        val cid = 2L
-//        val categoryObj: CategoryDTO? = service.read(cid)
-//
-//        Assert.isTrue(categoryObj?.category_id == cid)
-//    }
+    @Test
+    fun readTest() {
+        val categoryId = 1L
+        val categoryObj: CategoryDTO? = service.read(categoryId)
+
+        Assertions.assertEquals(categoryObj?.categoryId, categoryId)
+    }
 
     @Test
     fun deleteTest() {
-        val cid = 1L
-        val ret: Long = service.delete(cid)
+        val categoryId = 1L
+        val ret: Long = service.delete(categoryId)
 
-        Assert.isTrue(cid == ret)
+        Assertions.assertEquals(categoryId, ret)
     }
 }

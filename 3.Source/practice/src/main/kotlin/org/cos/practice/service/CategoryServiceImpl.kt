@@ -18,7 +18,7 @@ class CategoryServiceImpl : CategoryService {
     override fun insert(dto: CategoryDTO): Long {
         val entity: CategoryEntity = dtoToEntity(dto)!!
         repository.save(entity)
-        return entity.category_id
+        return entity.categoryId
     }
 
     @Override
@@ -29,15 +29,15 @@ class CategoryServiceImpl : CategoryService {
 
     @Override
     override fun modify(dto: CategoryDTO): Long {
-        var result = repository.findById(dto.category_id)
+        var result = repository.findById(dto.categoryId)
 
         if (result.isPresent()) {
             val entity: CategoryEntity = result.get()
-            entity.changeName(dto.category_name)
-            return entity.category_id
+            entity.changeName(dto.categoryName)
+            return entity.categoryId
         }
 
-        return -1;
+        return -1
     }
 
     @Override

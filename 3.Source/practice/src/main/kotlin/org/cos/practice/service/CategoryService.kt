@@ -10,10 +10,10 @@ interface CategoryService {
     fun delete(cid: Long): Long
 
     fun dtoToEntity(dto: CategoryDTO): CategoryEntity? {
-        return CategoryEntity(dto.category_id, dto.category_name)
+        return CategoryEntity(dto.categoryId, dto.categoryName)
     }
 
     fun entityToDTO(entity: CategoryEntity): CategoryDTO? {
-        return CategoryDTO(entity.category_id, entity.category_name)
+        return CategoryDTO(entity.categoryId, entity.categoryName)
     }
 }

@@ -18,20 +18,20 @@ class FavoriteServiceImpl : FavoriteService {
     override fun insert(dto: FavoriteDTO): String {
         val entity: FavoriteEntity = dtoToEntity(dto)!!
         repository.save(entity)
-        return entity.user_email
+        return entity.userEmail
     }
 
     @Override
-    override fun read(user_email: String): FavoriteDTO? {
-        val a = repository.findById(user_email)
+    override fun read(uid: String): FavoriteDTO? {
+        val a = repository.findById(uid)
         return if (a.isPresent()) entityToDTO(a.get()) else null
     }
 
     @Override
-    override fun delete(user_email: String): String {
+    override fun delete(uid: String): String {
         return try {
-            repository.deleteById(user_email)
-            user_email
+            repository.deleteById(uid)
+            uid
         } catch (ex: Exception) {
             ""
         }

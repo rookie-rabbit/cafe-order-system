@@ -6,6 +6,7 @@ import org.cos.practice.entity.Role
 import org.cos.practice.entity.UserEntity
 import org.cos.practice.repository.UserRepository
 import org.cos.practice.service.UserService
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,42 +25,42 @@ class UserRepositoryTests {
     @Autowired
     private lateinit var service: UserService
 
-//    @Test
-//    fun insertDummies() {
-//        val user = UserEntity(
-//            user_email = "user@nhn-commerce.com",
-//            user_password = passwordEncoder.encode("1111"),
-//            user_role = Role.USER
-//        )
-//        repository.save(user)
-//
-//        val admin = UserEntity(
-//            user_email = "admin@nhn-commerce.com",
-//            user_password = passwordEncoder.encode("1111"),
-//            user_role = Role.ADMIN
-//        )
-//        repository.save(admin)
-//    }
-
     @Test
-    fun readTest(){
-        val email = "user@nhn-commerce.com"
-        val userObj: UserDTO? = service.read(email)
+    fun insertDummies() {
+        val user = UserEntity(
+            userEmail = "user@nhn-commerce.com",
+            userPassword = passwordEncoder.encode("1111"),
+            userRole = Role.USER
+        )
+        repository.save(user)
 
-        println(userObj)
-        Assert.isTrue(userObj?.user_email == email)
+        val admin = UserEntity(
+            userEmail = "admin@nhn-commerce.com",
+            userPassword = passwordEncoder.encode("1111"),
+            userRole = Role.ADMIN
+        )
+        repository.save(admin)
     }
 
-//    @Test
-//    fun deleteTest() {
-//        val user_email: String = "user2@nhn-commerce.com"
-//        val user_ret: String = service.delete(user_email)
-//
-//        Assert.isTrue(user_email.equals(user_ret))
-//
-//        val admin_email: String = "admin2@nhn-commerce.com"
-//        val admin_ret: String = service.delete(admin_email)
-//
-//        Assert.isTrue(admin_email.equals(admin_ret))
-//    }
+    @Test
+    fun readTest() {
+        val userEmail = "user@nhn-commerce.com"
+        val userObj: UserDTO? = service.read(userEmail)
+
+        println(userObj)
+        Assertions.assertEquals(userObj?.userEmail, userEmail)
+    }
+
+    @Test
+    fun deleteTest() {
+        val userEmail: String = "user@nhn-commerce.com"
+        val userRet: String = service.delete(userEmail)
+
+        Assertions.assertEquals(userEmail, userRet)
+
+        val adminEmail: String = "admin@nhn-commerce.com"
+        val adminRet: String = service.delete(adminEmail)
+
+        Assertions.assertEquals(adminEmail, adminRet)
+    }
 }

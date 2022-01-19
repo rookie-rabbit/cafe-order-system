@@ -10,10 +10,10 @@ interface UserService {
     fun delete(user_email: String): String
 
     fun dtoToEntity(dto: UserDTO): UserEntity? {
-        return UserEntity(dto.user_email, dto.user_password, dto.user_role)
+        return UserEntity(dto.userEmail, dto.userPassword, dto.userRole)
     }
 
     fun entityToDTO(entity: UserEntity): UserDTO? {
-        return UserDTO(entity.user_email, entity.user_password, entity.user_role)
+        return UserDTO(entity.userEmail, entity.userPassword, entity.userRole)
     }
 }
