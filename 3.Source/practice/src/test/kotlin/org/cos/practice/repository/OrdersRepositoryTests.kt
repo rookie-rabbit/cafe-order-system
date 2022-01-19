@@ -1,6 +1,7 @@
 package org.cos.practice.repository
 
 import org.cos.practice.dto.OrdersDTO
+import org.cos.practice.entity.OrderStatus
 import org.cos.practice.entity.OrdersEntity
 import org.cos.practice.service.OrdersService
 import org.junit.jupiter.api.Assertions
@@ -20,7 +21,7 @@ class OrdersRepositoryTests @Autowired constructor(
     @Transactional
     @Rollback(false)
     fun insertDummies() {
-        val order = OrdersEntity(orderId = 1, userEmail = "a@a.a", orderDisplayId = 1, orderIsCompleted = false)
+        val order = OrdersEntity(orderId = 1, userEmail = "a@a.a", orderDisplayId = 1, orderStatus = OrderStatus.PREPARING)
 
         ordersRepository.save(order)
     }
@@ -42,12 +43,16 @@ class OrdersRepositoryTests @Autowired constructor(
         val orderId: Long = 1L
         val ordersObj: OrdersDTO? = service.read(orderId)
         if(ordersObj != null) {
-            val prevStatus: Boolean = ordersObj.orderIsCompleted
-            ordersObj.orderIsCompleted = !prevStatus
+            val prevStatus: OrderStatus = ordersObj.orderStatus
+            if(prevStatus == OrderStatus.PREPARING)
+                ordersObj.orderStatus = OrderStatus.COMPLETED
+            else
+                ordersObj.orderStatus = OrderStatus.PREPARING
+
             val ret: Long = service.modify(ordersObj)
 
             Assertions.assertEquals(ret, orderId)
-            Assertions.assertNotEquals(prevStatus, ordersObj.orderIsCompleted)
+            Assertions.assertNotEquals(prevStatus, ordersObj.orderStatus)
         }else
             Assertions.assertNotNull(ordersObj)
     }

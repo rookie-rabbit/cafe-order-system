@@ -10,10 +10,10 @@ interface OrdersService {
     fun delete(orderId : Long) : Long
 
     fun dtoToEntity(dto : OrdersDTO) : OrdersEntity? {
-        return OrdersEntity(dto.orderId, dto.userEmail, dto.orderDisplayId, dto.orderIsCompleted)
+        return OrdersEntity(dto.orderId, dto.userEmail, dto.orderDisplayId, dto.orderStatus)
     }
 
     fun entityToDTO(entity : OrdersEntity) : OrdersDTO? {
-        return OrdersDTO(entity.orderId, entity.userEmail, entity.orderDisplayId, entity.orderIsCompleted)
+        return OrdersDTO(entity.orderId, entity.userEmail, entity.orderDisplayId, entity.orderStatus)
     }
 }

@@ -12,11 +12,16 @@ import javax.persistence.*
 @ToString
 data class OrdersEntity(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "order_id") val orderId: Long,
-        @Column(name = "user_email") val userEmail: String,
+        @Column(name = "user_email") val userEmail: String = "",
         @Column(name = "order_display_id") val orderDisplayId: Long,
-        @Column(name = "order_is_completed") var orderIsCompleted: Boolean
+        @Column(name = "order_status") @Enumerated(EnumType.STRING) var orderStatus: OrderStatus = OrderStatus.PREPARING
 ) : BaseTimeEntity(){
-    fun changeIsComplete(isCompleted: Boolean){
-        this.orderIsCompleted = isCompleted
+    fun changeStatus(status: OrderStatus){
+        this.orderStatus = status
     }
+}
+
+enum class OrderStatus{
+    PREPARING, // 준비중
+    COMPLETED // 완료
 }

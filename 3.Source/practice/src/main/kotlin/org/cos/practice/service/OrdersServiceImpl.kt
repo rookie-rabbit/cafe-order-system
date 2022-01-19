@@ -3,7 +3,6 @@ package org.cos.practice.service
 import lombok.RequiredArgsConstructor
 import org.cos.practice.dto.OrdersDTO
 import org.cos.practice.entity.OrdersEntity
-import org.cos.practice.repository.OrderDetailRepository
 import org.cos.practice.repository.OrdersRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -30,9 +29,9 @@ class OrdersServiceImpl @Autowired constructor(
     override fun modify(dto: OrdersDTO): Long {
         var result = repository.findById(dto.orderId)
 
-        if(result.isPresent()){
+        if(result.isPresent){
             val entity : OrdersEntity = result.get();
-            entity.changeIsComplete(dto.orderIsCompleted)
+            entity.changeStatus(dto.orderStatus)
             return entity.orderId
         }
 
