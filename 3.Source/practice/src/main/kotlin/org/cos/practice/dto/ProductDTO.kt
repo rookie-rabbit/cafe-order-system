@@ -1,16 +1,27 @@
 package org.cos.practice.dto
 
-import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import lombok.*
+import org.cos.practice.entity.ProductTemp
 
-class ProductDTO (
-        val pID: Long=0,
-        val pName: String = "",
-        val pPrice: Int = 0,
-        val pCntPerDay: Int = 0,
-        val pLastSellDate: LocalDateTime? = null,
-        val pIsShow: Boolean = false
-){}
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+class ProductDTO(
+    val productId: Long = 0L,
+    val productName: String = "",
+    val categoryId: Long = 0L,
+    val productTemp: ProductTemp = ProductTemp.ICE,
+    val productVisible: Boolean = false,
+    var productAvailable: Boolean = false,
+    val productFileImagePath: String? = null
+) {
+    fun isProductVisible(): Boolean {
+        return this.productVisible
+    }
+
+    fun isProductAvailable(): Boolean {
+        return this.productAvailable
+    }
+}

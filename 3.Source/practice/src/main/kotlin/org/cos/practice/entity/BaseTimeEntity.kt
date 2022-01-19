@@ -16,10 +16,10 @@ import javax.persistence.MappedSuperclass
 @NoArgsConstructor
 abstract class BaseTimeEntity {
     @CreatedDate
-    @Column(name = "regDate", updatable=false)
+    @Column(name = "reg_date", updatable=false)
     private val regDate: LocalDateTime? = LocalDateTime.now();
 
     @LastModifiedDate
-    @Column(name = "modifiedDate")
+    @Column(name = "mod_date")
     private val modifiedDate: LocalDateTime? = LocalDateTime.now();
 }

@@ -2,18 +2,25 @@ package org.cos.practice.service
 
 import org.cos.practice.entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
+import org.cos.practice.entity.ProductTemp
 
 interface ProductService {
-    fun insert(dto : ProductDTO) : Long
-    fun read(pID : Long) : ProductDTO?
-    fun modify(dto : ProductDTO) : Long
-    fun delete(pID : Long) : Long
+    fun insert(product : ProductDTO) : Long
+    fun findProductById(productId : Long) : ProductDTO?
+    fun modify(product : ProductDTO) : Long
+    fun delete(productId : Long) : Long
 
-    fun dtoToEntity(dto : ProductDTO) : ProductEntity? {
-        return ProductEntity(dto.pID, dto.pName, dto.pPrice, dto.pCntPerDay, dto.pLastSellDate, dto.pIsShow)
+    fun dtoToEntity(product : ProductDTO) : ProductEntity? {
+        return ProductEntity(product.productId, product.productName, product.categoryId,
+            product.productTemp , product.isProductVisible(), product.isProductAvailable(),
+            product.productFileImagePath)
     }
 
-    fun entityToDTO(entity : ProductEntity) : ProductDTO? {
-        return ProductDTO(entity.pID, entity.pName, entity.pPrice, entity.pCntPerDay, entity.pLastSellDate, entity.pIsShow)
+    fun entityToDTO(productEntity : ProductEntity) : ProductDTO? {
+        return productEntity.productName?.let {
+            ProductDTO(productEntity.productId, it, productEntity.categoryId,
+                productEntity.productTemp, productEntity.productVisible,
+                productEntity.productAvailable, productEntity.productFileImagePath)
+        }
     }
 }

@@ -14,30 +14,30 @@ import javax.transaction.Transactional
 @RequestMapping("/product")
 @RequiredArgsConstructor
 class ProductController {
-    @Autowired
-    private lateinit var service: ProductService
-
-    @GetMapping("/read/{pID}")
-    fun read(@PathVariable pID: Long, model: Model) : ProductDTO?{
-        return service.read(pID)
-    }
-
-    @PostMapping("/insert")
-    @Transactional
-    fun insert(dto: ProductDTO, principal: Principal, model: Model) : Long{
-        model.addAttribute("roles", (principal as UsernamePasswordAuthenticationToken).authorities)
-        return service.insert(dto)
-    }
-
-    @PostMapping("/modify")
-    @Transactional
-    fun modify(@RequestBody dto: ProductDTO, model: Model) : Long{
-        return service.modify(dto)
-    }
-
-    @GetMapping("/delete/{pID}")
-    @Transactional
-    fun delete(@PathVariable pID: Long, model: Model): Long{
-        return service.delete(pID)
-    }
+//    @Autowired
+//    private lateinit var service: ProductService
+//
+//    @GetMapping("/read/{pID}")
+//    fun read(@PathVariable pID: Long, model: Model) : ProductDTO?{
+//        return service.read(pID)
+//    }
+//
+//    @PostMapping("/insert")
+//    @Transactional
+//    fun insert(dto: ProductDTO, principal: Principal, model: Model) : Long{
+//        model.addAttribute("roles", (principal as UsernamePasswordAuthenticationToken).authorities)
+//        return service.insert(dto)
+//    }
+//
+//    @PostMapping("/modify")
+//    @Transactional
+//    fun modify(@RequestBody dto: ProductDTO, model: Model) : Long{
+//        return service.modify(dto)
+//    }
+//
+//    @GetMapping("/delete/{pID}")
+//    @Transactional
+//    fun delete(@PathVariable pID: Long, model: Model): Long{
+//        return service.delete(pID)
+//    }
 }
