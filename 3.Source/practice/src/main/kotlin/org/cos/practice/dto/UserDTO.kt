@@ -1,13 +1,9 @@
 package org.cos.practice.dto
 
-import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import org.cos.practice.entity.Role
 
-class UserDTO (
-    val uID: String = "",
-    val uPW: String = "",
-    val uRL: Int = 0
-){}
+class UserDTO(
+    val userEmail: String = "",
+    val userPassword: String = "",
+    val userRole: Role = Role.USER
+)
