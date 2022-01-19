@@ -1,43 +1,38 @@
 package org.cos.practice.entity
 
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 import lombok.*
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
-@Table(name = "COProducts")
+@Table(name = "PRODUCT")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 data class ProductEntity(
-        @Id @Column(name = "pID") @GeneratedValue(strategy = GenerationType.IDENTITY) val pID: Long=0,
-        @Column(name = "pName", length = 100) var pName: String = "",
-        @Column(name = "pPrice") var pPrice: Int = 0,
-        @Column(name = "pCntPerDay") var pCntPerDay: Int = 0,
-        @Column(name = "pLastSellDate") var pLastSellDate: LocalDateTime? = null,
-        @Column(name = "pIsShow") var pIsShow: Boolean = false
+    @Id
+    @Column(name = "product_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val productId: Long,
+
+    @Column(name = "product_name", length = 100)
+    var productName: String = "",
+    @Column(name = "category_id")
+    var categoryId: Long,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_temp")
+    var productTemp: ProductTemp = ProductTemp.ICE,
+    @Column(name = "product_visible")
+    var productVisible: Boolean = false,
+    @Column(name = "product_available")
+    var productAvailable: Boolean = false,
+    @Column(name = "product_file_image_path")
+    var productFileImagePath: String? = null
+
 ) : BaseTimeEntity()
-{
-    fun changeName(name: String){
-        this.pName = name
-    }
 
-    fun changePrice(price: Int){
-        this.pPrice = price
-    }
-
-    fun changeCntPerDay(cnt: Int){
-        this.pCntPerDay = cnt
-    }
-
-    fun changeLastSellDate(date: LocalDateTime?){
-        this.pLastSellDate = date
-    }
-
-    fun changeIsShow(isShow: Boolean){
-        this.pIsShow = isShow
-    }
+enum class ProductTemp {
+    HOT, ICE
 }
