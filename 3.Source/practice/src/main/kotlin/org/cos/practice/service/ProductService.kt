@@ -2,7 +2,6 @@ package org.cos.practice.service
 
 import org.cos.practice.entity.ProductEntity
 import org.cos.practice.dto.ProductDTO
-import org.cos.practice.entity.ProductTemp
 
 interface ProductService {
     fun insert(product : ProductDTO) : Long

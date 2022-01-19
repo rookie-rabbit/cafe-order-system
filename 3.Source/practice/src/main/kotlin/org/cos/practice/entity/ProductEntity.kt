@@ -17,7 +17,7 @@ data class ProductEntity(
     val productId: Long,
 
     @Column(name = "product_name", length = 100)
-    var productName: String? = "",
+    var productName: String = "",
     @Column(name = "category_id")
     var categoryId: Long,
 
@@ -32,3 +32,7 @@ data class ProductEntity(
     var productFileImagePath: String? = null
 
 ) : BaseTimeEntity()
+
+enum class ProductTemp {
+    HOT, ICE
+}
