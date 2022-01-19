@@ -9,48 +9,45 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class ProductServiceImpl : ProductService{
-
-    @Autowired
-    private lateinit var repository: ProductRepository
+class ProductServiceImpl @Autowired constructor(
+    val repository: ProductRepository
+) : ProductService {
 
     @Override
-    override fun insert(dto: ProductDTO): Long {
-        var entity : ProductEntity = dtoToEntity(dto)!!
+    override fun insert(product: ProductDTO): Long {
+        val entity: ProductEntity = dtoToEntity(product)!!
         repository.save(entity)
-        return entity.pID
+        return entity.productId
     }
 
     @Override
-    override fun read(pID: Long): ProductDTO? {
-        val a = repository.findById(pID)
-        return if(a.isPresent()) entityToDTO(a.get()) else null
+    override fun findProductById(productId: Long): ProductDTO? {
+        val product = repository.findById(productId)
+        return if (product.isPresent) entityToDTO(product.get()) else null
     }
 
-    override fun modify(dto: ProductDTO): Long {
-        var result = repository.findById(dto.pID)
+    override fun modify(product: ProductDTO): Long {
+        val result = repository.findById(product.productId)
 
-        if(result.isPresent()){
-            val entity : ProductEntity = result.get();
-            entity.changeName(dto.pName)
-            entity.changePrice(dto.pPrice)
-            entity.changeCntPerDay(dto.pCntPerDay)
-            entity.changeLastSellDate(dto.pLastSellDate)
-            entity.changeIsShow(dto.pIsShow)
-            return entity.pID
+        if (result.isPresent) {
+            val entity: ProductEntity = result.get();
+            entity.productName = product.productName
+            entity.categoryId = product.categoryId
+            entity.productTemp = product.productTemp
+            entity.productVisible = product.productVisible
+            entity.productAvailable = product.productAvailable
+            entity.productFileImagePath = product.productFileImagePath
+            return entity.productId
         }
-
         return -1;
     }
 
-    override fun delete(pID: Long): Long {
-        try{
-            repository.deleteById(pID)
-            return pID
-        }catch (ex: Exception){
-            return -1
+    override fun delete(productId: Long): Long {
+        return try {
+            repository.deleteById(productId)
+            productId
+        } catch (ex: Exception) {
+            -1
         }
     }
-
-
 }

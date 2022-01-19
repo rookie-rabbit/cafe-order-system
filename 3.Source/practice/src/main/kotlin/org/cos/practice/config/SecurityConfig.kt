@@ -27,19 +27,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity?) {
-        if (http != null) {
-            http.authorizeRequests()
-                    .anyRequest().authenticated()
-                    .and()
-                    .csrf().disable()
-                    .httpBasic()
-                    .and()
-                    .formLogin()
-                    .defaultSuccessUrl("/home", true)
-                    .and()
-                    .logout()
-                    .and()
-                    .exceptionHandling().accessDeniedPage("/403")
-        }
+        http?.authorizeRequests()?.anyRequest()?.authenticated()?.and()?.csrf()?.disable()?.httpBasic()?.and()
+            ?.formLogin()?.defaultSuccessUrl("/home", true)?.and()?.logout()?.and()?.exceptionHandling()
+            ?.accessDeniedPage("/403")
     }
 }

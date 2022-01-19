@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class PasswordTests {
     @Autowired
     private val passwordEncoder: PasswordEncoder? = null
+
     @Test
     fun testEncode() {
         val password = "1111"
