@@ -1,4 +1,7 @@
 package org.cos.practice.repository
 
-interface OrderDetailRepository {
+import org.cos.practice.entity.OrderDetailEntity
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface OrderDetailRepository : JpaRepository<OrderDetailEntity, Long> {
 }
