@@ -1,7 +1,6 @@
 package org.cos.practice.entity
 
 import lombok.*
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -11,13 +10,13 @@ import javax.persistence.*
 @AllArgsConstructor
 @Table(name = "ORDERS")
 @ToString
-data class OrdersEntity (
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "order_id") val order_id: Long,
-        @Column(name = "user_email") val user_email: String,
-        @Column(name = "order_display_id") val order_display_id: Long,
-        @Column(name = "order_is_completed") var order_is_completed: Boolean
+data class OrdersEntity(
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "order_id") val orderId: Long,
+        @Column(name = "user_email") val userEmail: String,
+        @Column(name = "order_display_id") val orderDisplayId: Long,
+        @Column(name = "order_is_completed") var orderIsCompleted: Boolean
 ) : BaseTimeEntity(){
     fun changeIsComplete(isCompleted: Boolean){
-        this.order_is_completed = isCompleted
+        this.orderIsCompleted = isCompleted
     }
 }

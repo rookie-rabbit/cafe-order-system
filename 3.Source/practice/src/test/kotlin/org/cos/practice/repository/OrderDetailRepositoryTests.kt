@@ -8,43 +8,39 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.Rollback
-import org.springframework.util.Assert
 import javax.transaction.Transactional
 
 @SpringBootTest
-class OrderDetailRepositoryTests {
-    @Autowired
-    private lateinit var orderDetailRepository: OrderDetailRepository
-
-    @Autowired
-    private lateinit var service: OrderDetailService
+class OrderDetailRepositoryTests @Autowired constructor(
+        val orderDetailRepository: OrderDetailRepository,
+        val service: OrderDetailService){
 
     @Test
     @Transactional
     @Rollback(false)
-    public fun insertDummies() {
-        val orderDetail = OrderDetailEntity(order_detail_id = 1, order_id = 1, product_id = 1, product_cnt = 1)
+    fun insertDummies() {
+        val orderDetail = OrderDetailEntity(orderDetailId = 1, orderId = 1, productId = 1, productCnt = 1)
 
         orderDetailRepository.save(orderDetail)
     }
 
     @Test
     fun readTest(){
-        val order_detail_id = 1L
-        val orderDetailObj: OrderDetailDTO? = service.read(order_detail_id)
+        val orderDetailId = 1L
+        val orderDetailObj: OrderDetailDTO? = service.read(orderDetailId)
 
         if(orderDetailObj == null)
             Assertions.assertTrue(false)
         else{
-            Assertions.assertEquals(orderDetailObj.order_detail_id, order_detail_id)
+            Assertions.assertEquals(orderDetailObj.orderDetailId, orderDetailId)
         }
     }
 
     @Test
     fun deleteTest(){
-        val order_detail_id = 1L
-        val ret:Long = service.delete(order_detail_id)
+        val orderDetailId = 1L
+        val ret:Long = service.delete(orderDetailId)
 
-        Assertions.assertEquals(order_detail_id, ret)
+        Assertions.assertEquals(orderDetailId, ret)
     }
 }

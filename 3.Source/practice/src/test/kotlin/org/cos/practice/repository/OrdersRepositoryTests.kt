@@ -12,53 +12,50 @@ import org.springframework.test.annotation.Rollback
 import javax.transaction.Transactional
 
 @SpringBootTest
-class OrdersRepositoryTests {
-    @Autowired
-    private lateinit var ordersRepository: OrdersRepository
-
-    @Autowired
-    private lateinit var service: OrdersService
+class OrdersRepositoryTests @Autowired constructor(
+        val ordersRepository: OrdersRepository,
+        val service: OrdersService){
 
     @Test
     @Transactional
     @Rollback(false)
-    public fun insertDummies() {
-        val order = OrdersEntity(order_id = 1, user_email = "a@a.a", order_display_id = 1, order_is_completed = false)
+    fun insertDummies() {
+        val order = OrdersEntity(orderId = 1, userEmail = "a@a.a", orderDisplayId = 1, orderIsCompleted = false)
 
         ordersRepository.save(order)
     }
 
     @Test
     fun readTest(){
-        val order_id: Long = 1L
-        val ordersObj: OrdersDTO? = service.read(order_id)
+        val orderId: Long = 1L
+        val ordersObj: OrdersDTO? = service.read(orderId)
 
         if(ordersObj == null)
             assertTrue(false)
         else{
-            assertEquals(ordersObj.order_id, order_id)
+            assertEquals(ordersObj.orderId, orderId)
         }
     }
 
     @Test
     fun modifyTest(){
-        val order_id: Long = 1L
-        val ordersObj: OrdersDTO? = service.read(order_id)
+        val orderId: Long = 1L
+        val ordersObj: OrdersDTO? = service.read(orderId)
         if(ordersObj != null) {
-            val prevStatus: Boolean = ordersObj.order_is_completed
-            ordersObj.order_is_completed = !prevStatus
+            val prevStatus: Boolean = ordersObj.orderIsCompleted
+            ordersObj.orderIsCompleted = !prevStatus
             val ret: Long = service.modify(ordersObj)
 
-            Assertions.assertEquals(ret, order_id)
-            Assertions.assertNotEquals(prevStatus, ordersObj.order_is_completed)
+            Assertions.assertEquals(ret, orderId)
+            Assertions.assertNotEquals(prevStatus, ordersObj.orderIsCompleted)
         }else
             Assertions.assertNotNull(ordersObj)
     }
     @Test
     fun deleteTest(){
-        val order_id: Long = 1L
-        val ret:Long = service.delete(order_id)
+        val orderId: Long = 1L
+        val ret:Long = service.delete(orderId)
 
-        assertEquals(order_id, ret)
+        assertEquals(orderId, ret)
     }
 }

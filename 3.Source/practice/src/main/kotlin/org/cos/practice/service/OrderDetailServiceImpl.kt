@@ -9,29 +9,29 @@ import org.springframework.stereotype.Service
 
 @Service
 @RequiredArgsConstructor
-class OrderDetailServiceImpl : OrderDetailService{
-    @Autowired
-    private lateinit var repository: OrderDetailRepository
-    
+class OrderDetailServiceImpl @Autowired constructor(
+        val repository: OrderDetailRepository)
+    : OrderDetailService{
+
     override fun insert(dto: OrderDetailDTO): Long {
         var entity : OrderDetailEntity = dtoToEntity(dto)!!
         repository.save(entity)
-        return entity.order_detail_id
+        return entity.orderDetailId
     }
 
-    override fun read(order_detail_id: Long): OrderDetailDTO? {
-        val a = repository.findById(order_detail_id)
-        return if(a.isPresent()) entityToDTO(a.get()) else null
+    override fun read(orderDetailId: Long): OrderDetailDTO? {
+        val ret = repository.findById(orderDetailId)
+        return if(ret.isPresent()) entityToDTO(ret.get()) else null
     }
 
     override fun modify(dto: OrderDetailDTO): Long {
-        return dto.order_detail_id
+        return dto.orderDetailId
     }
 
-    override fun delete(order_detail_id: Long): Long {
+    override fun delete(orderDetailId: Long): Long {
         try{
-            repository.deleteById(order_detail_id)
-            return order_detail_id
+            repository.deleteById(orderDetailId)
+            return orderDetailId
         }catch (ex: Exception){
             return -1
         }
