@@ -23,7 +23,7 @@ class FavoriteServiceImpl @Autowired constructor(
     @Override
     override fun read(userEmail: String): FavoriteDTO? {
         val a = repository.findById(userEmail)
-        return if (a.isPresent()) entityToDTO(a.get()) else null
+        return if (a.isPresent) entityToDTO(a.get()) else null
     }
 
     @Override
