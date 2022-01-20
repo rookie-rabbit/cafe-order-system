@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.util.Assert
-import javax.transaction.Transactional
 
 @SpringBootTest
 class FavoriteRepositoryTests @Autowired constructor(
@@ -19,7 +17,7 @@ class FavoriteRepositoryTests @Autowired constructor(
 
     @Test
     fun insertDummies() {
-        val favorite = FavoriteEntity(userEmail = "user1@nhn-commerce.com", productId = 1)
+        val favorite = FavoriteEntity(userEmail = "user1@nhn-commerce.com", productIdList = mutableListOf("1","2"))
         repository.save(favorite)
     }
 
@@ -27,7 +25,7 @@ class FavoriteRepositoryTests @Autowired constructor(
     fun readTest() {
         val userEmail = "user1@nhn-commerce.com"
         val favoriteObj: FavoriteDTO? = service.read(userEmail)
-
+        Assertions.assertTrue(favoriteObj?.productIdList?.size == 2)
         Assertions.assertEquals(favoriteObj?.userEmail, userEmail)
     }
 
